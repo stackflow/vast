@@ -39,7 +39,7 @@
 
     <video id="vid1" class="video-js vjs-default-skin" controls autoplay preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
-           data-setup='{}'
+           data-setup='{"volume": 50}'
            width='640'
            height='400'
     >
@@ -55,7 +55,7 @@
 
     <video id="vid2" class="video-js vjs-default-skin" controls autoplay preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
-           data-setup='{}'
+           data-setup='{"volume": 50}'
            width='640'
            height='400'
     >
@@ -103,12 +103,8 @@
             '&autoplay=' + autoplay +
             '&duration=' + duration;
 
-    var vid1 = videojs('vid1', {}, function() {
-        this.setVolume(50);
-    });
-    var vid2 = videojs('vid2', {}, function() {
-        this.setVolume(50);
-    });
+    var vid1 = videojs('vid1');
+    var vid2 = videojs('vid2');
 
     vid1.muted(true);
     vid1.ads();
