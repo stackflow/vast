@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Video.js VAST Example</title>
 
-    <link href="http://vjs.zencdn.net/5.0.0/video-js.css" rel="stylesheet">
+    <link href="http://vjs.zencdn.net/4.12.7/video-js.css" rel="stylesheet">
     <link href="lib/videojs-contrib-ads/videojs.ads.css" rel="stylesheet" type="text/css">
     <link href="videojs.vast.css" rel="stylesheet" type="text/css">
 
@@ -27,7 +27,7 @@
     <!-- Exclude this if you don't need ie8 support -->
     <script src="http://vjs.zencdn.net/ie8/1.1.0/videojs-ie8.min.js"></script>
 
-    <script src="http://vjs.zencdn.net/5.0.0/video.js"></script>
+    <script src="http://vjs.zencdn.net/4.12.7/video.js"></script>
     <script src="lib/videojs-contrib-ads/videojs.ads.js"></script>
 
     <script src="lib/vast-client.js"></script>
@@ -39,7 +39,7 @@
 <div class="example-video-container">
     <p class="description">Advark</p>
 
-    <video id="vid1" class="video-js vjs-default-skin" controls autoplay preload="auto"
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='640'
@@ -55,7 +55,7 @@
 <div class="example-video-container">
     <p class="description">Sample</p>
 
-    <video id="vid2" class="video-js vjs-default-skin" controls autoplay preload="auto"
+    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='640'
@@ -96,7 +96,7 @@
     var referer = encodeURIComponent(window.location.href); // адрес страницы (с http://), на которой воспроизводится видео в текущий момент.
     var video_id = encodeURIComponent(window.btoa(encodeURIComponent(window.location.href))); // уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
     var page = referer; // адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
-    var autoplay = 0; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
     var duration = 10; // длительность видео в секундах
     var url = 'http://public.advarkads.com/vast?target_id=1&type_id=3&id=' + id +
             '&referer_url=' + referer +
@@ -108,12 +108,15 @@
     var vid1 = videojs('vid1');
     var vid2 = videojs('vid2');
 
-    vid1.muted(false);
+
+    vid1.autoplay(autoplay);
+    vid1.muted(true);
     vid1.ads();
     vid1.vast({
         url: url
     });
 
+    vid2.autoplay(autoplay);
     vid2.muted(false);
     vid2.ads();
     vid2.vast({
