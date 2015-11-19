@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Video.js VAST Example</title>
 
-    <link href="http://vjs.zencdn.net/4.12.7/video-js.css" rel="stylesheet">
+    <link href="video-js.css" rel="stylesheet">
     <link href="lib/videojs-contrib-ads/videojs.ads.css" rel="stylesheet" type="text/css">
     <link href="videojs.vast.css" rel="stylesheet" type="text/css">
 
@@ -25,9 +25,9 @@
 
     <!-- Include ES5 shim, sham and html5 shiv for ie8 support  -->
     <!-- Exclude this if you don't need ie8 support -->
-    <script src="http://vjs.zencdn.net/ie8/1.1.0/videojs-ie8.min.js"></script>
+    <script src="lib/videojs-ie8.min.js"></script>
 
-    <script src="http://vjs.zencdn.net/4.12.7/video.js"></script>
+    <script src="lib/video.js"></script>
     <script src="lib/videojs-contrib-ads/videojs.ads.js"></script>
 
     <script src="lib/vast-client.js"></script>
@@ -42,8 +42,24 @@
     <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
-           width='640'
-           height='400'
+           width='320'
+           height='200'
+    >
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+
+<div class="example-video-container">
+    <p class="description">Mediatoday</p>
+
+    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='320'
+           height='200'
     >
         <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
         <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
@@ -55,11 +71,11 @@
 <div class="example-video-container">
     <p class="description">Sample</p>
 
-    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
+    <video id="vid3" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
-           width='640'
-           height='400'
+           width='320'
+           height='200'
     >
         <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
         <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
@@ -92,7 +108,7 @@
      * [duration] - длительность видео в секундах.
      * Все подставленные значения должны быть url-закодированы
      */
-    var id = encodeURIComponent('123456'); // ваш идентификатор в системе Advark
+    var id = encodeURIComponent('4976-1-1'); // ваш идентификатор в системе Advark
     var referer = encodeURIComponent(window.location.href); // адрес страницы (с http://), на которой воспроизводится видео в текущий момент.
     var video_id = encodeURIComponent(window.btoa(encodeURIComponent(window.location.href))); // уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
     var page = referer; // адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
@@ -119,8 +135,16 @@
     vid2.muted(true);
     vid2.ads();
     vid2.vast({
+        url: 'http://mediatoday.ru/core/code.xml?pid=6504&vr=1'
+    });
+
+    vid3.autoplay(autoplay);
+    vid3.muted(true);
+    vid3.ads();
+    vid3.vast({
         url: 'http://videoads.theonion.com/vast/270.xml'
     });
+
 </script>
 
 </body>
