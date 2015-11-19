@@ -22,9 +22,11 @@
             display: inline-block;
         }
     </style>
-    <!--[if lt IE 9]>
-    <script src="lib/es5.js"></script>
-    <![endif]-->
+
+    <!-- Include ES5 shim, sham and html5 shiv for ie8 support  -->
+    <!-- Exclude this if you don't need ie8 support -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.0/videojs-ie8.min.js"></script>
+
     <script src="http://vjs.zencdn.net/4.12.7/video.js"></script>
     <script src="lib/videojs-contrib-ads/videojs.ads.js"></script>
 
