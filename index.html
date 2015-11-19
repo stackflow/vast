@@ -104,10 +104,10 @@
             '&duration=' + duration;
 
     var vid1 = videojs('vid1', {}, function() {
-        this.volume(50);
+        this.setVolume(50);
     });
     var vid2 = videojs('vid2', {}, function() {
-        this.volume(50);
+        this.setVolume(50);
     });
 
     vid1.muted(true);
