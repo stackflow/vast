@@ -39,7 +39,7 @@
 <div class="example-video-container">
     <p class="description">Mediatoday</p>
 
-    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
+    <video id="vid1" class="video-js vjs-default-skin" controls autoplay preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='480'
@@ -55,7 +55,7 @@
 <div class="example-video-container">
     <p class="description">Sample</p>
 
-    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
+    <video id="vid2" class="video-js vjs-default-skin" controls autoplay preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='480'
@@ -72,14 +72,12 @@
     var vid1 = videojs('vid1');
     var vid2 = videojs('vid2');
 
-    vid1.autoplay(true);
     vid1.muted(true);
     vid1.ads();
     vid1.vast({
         url: 'http://mediatoday.ru/core/code.xml?pid=6504&vr=1'
     });
 
-    vid2.autoplay(true);
     vid2.muted(true);
     vid2.ads();
     vid2.vast({
