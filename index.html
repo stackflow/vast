@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Video.js VAST Example</title>
 
-    <link href="video-js.css" rel="stylesheet">
+    <link href="css/video-js.css" rel="stylesheet">
     <link href="lib/videojs-contrib-ads/videojs.ads.css" rel="stylesheet" type="text/css">
     <link href="videojs.vast.css" rel="stylesheet" type="text/css">
 
@@ -104,7 +104,7 @@
      * [video_id] - уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
      * [title] - заголовок видео (если имеется). Если нет, параметр можно не передавать.
      * [page] - адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
-     * [autoplay] - подставить "1"(без кавычек), если воспроизведение видео началось автоматически, иначе необходимо передать "0" (без кавычек).
+     * [autoplay] - подставить 1, если воспроизведение видео началось автоматически, иначе необходимо поставить 0
      * [duration] - длительность видео в секундах.
      * Все подставленные значения должны быть url-закодированы
      */
@@ -120,8 +120,10 @@
             '&video_page_url=' + page +
             '&autoplay=' + autoplay +
             '&duration=' + duration;
+
     var vid1 = videojs('vid1');
     var vid2 = videojs('vid2');
+    var vid3 = videojs('vid3');
 
 
     vid1.autoplay(autoplay);
