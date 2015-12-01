@@ -62,7 +62,10 @@
 <script src="lib/videojs.ads.js"></script>
 <script src="lib/videojs.ima.js"></script>
 <script>
+    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+
     var player1 = videojs('vid1');
+    player1.autoplay(autoplay != 0);
     player1.muted(true);
     var options1 = {
         id: 'vid1',
@@ -73,7 +76,7 @@
     player1.play();
 
     var player2 = videojs('vid2');
-    player2.autoplay(autoplay);
+    player1.autoplay(autoplay != 0);
     player2.muted(true);
     var options2 = {
         id: 'vid2',

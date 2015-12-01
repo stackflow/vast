@@ -89,7 +89,7 @@
     var referer = encodeURIComponent(window.location.href); // адрес страницы (с http://), на которой воспроизводится видео в текущий момент.
     var video_id = encodeURIComponent(window.btoa(encodeURIComponent(window.location.href))); // уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
     var page = referer; // адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
-    var autoplay = 0; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
     var duration = 46; // длительность видео в секундах
     var url = 'http://public.advarkads.com/vast?target_id=1&type_id=3&id=' + id +
             '&referer_url=' + referer +
@@ -99,7 +99,7 @@
             '&duration=' + duration;
 
     var player1 = videojs('vid1');
-    player1.autoplay(autoplay);
+    player1.autoplay(autoplay != 0);
     player1.muted(true);
     var options1 = {
         id: 'vid1',
@@ -110,7 +110,7 @@
     player1.play();
 
     var player2 = videojs('vid2');
-    player2.autoplay(autoplay);
+    player2.autoplay(autoplay != 0);
     player2.muted(true);
     var options2 = {
         id: 'vid2',
