@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Video.js VAST Example</title>
+
+    <link href="css/videojs.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.ads.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        .description {
+            background-color: #eee;
+            border: 1px solid #777;
+            padding: 10px;
+            font-size: .8em;
+            line-height: 1.5em;
+            font-family: Verdana, sans-serif;
+        }
+
+        .example-video-container {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+<p class="description">Video.js VPAID plugin</p>
+
+<div class="example-video-container">
+    <p class="description">Sample</p>
+
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='480'
+           height='300'
+    >
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+
+<script src="lib/video.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="lib/videojs.ads.js"></script>
+<script src="lib/videojs.ima.js"></script>
+<script>
+    var player = videojs('vid1');
+    player.autoplay(autoplay != 0);
+    player.muted(true);
+    var options = {
+        id: 'vid1',
+        adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
+    };
+    player.ima(options);
+    player.ima.requestAds();
+    player.play();
+
+</script>
+
+</body>
+</html>
