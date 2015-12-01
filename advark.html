@@ -106,7 +106,6 @@
         adTagUrl: url
     };
     player1.ima(options1);
-//    player1.ima.initializeAdDisplayContainer();
     player1.ima.requestAds();
     player1.play();
 
@@ -114,7 +113,7 @@
     player2.autoplay(autoplay);
     player2.muted(true);
     var options2 = {
-        id: 'vid1',
+        id: 'vid2',
 //        adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&' +
 //        'iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&' +
 //        'impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&' +
@@ -123,7 +122,6 @@
         adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
     };
     player2.ima(options2);
-//    player2.ima.initializeAdDisplayContainer();
     player2.ima.requestAds();
     player2.play();
 

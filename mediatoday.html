@@ -4,9 +4,8 @@
     <meta charset="utf-8"/>
     <title>Video.js VAST Example</title>
 
-    <link href="css/video-js.css" rel="stylesheet">
-    <link href="lib/videojs-contrib-ads/videojs.ads.css" rel="stylesheet" type="text/css">
-    <link href="videojs.vast.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.ads.css" rel="stylesheet" type="text/css">
 
     <style type="text/css">
         .description {
@@ -23,15 +22,6 @@
         }
     </style>
 
-    <!-- Include ES5 shim, sham and html5 shiv for ie8 support  -->
-    <!-- Exclude this if you don't need ie8 support -->
-    <script src="lib/videojs-ie8.min.js"></script>
-
-    <script src="lib/video.js"></script>
-    <script src="lib/videojs-contrib-ads/videojs.ads.js"></script>
-
-    <script src="lib/vast-client.js"></script>
-    <script src="videojs.vast.js"></script>
 </head>
 <body>
 <p class="description">Video.js VAST plugin examples.</p>
@@ -39,7 +29,7 @@
 <div class="example-video-container">
     <p class="description">Mediatoday</p>
 
-    <video id="vid1" class="video-js vjs-default-skin" controls autoplay preload="auto"
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='480'
@@ -55,7 +45,7 @@
 <div class="example-video-container">
     <p class="description">Sample</p>
 
-    <video id="vid2" class="video-js vjs-default-skin" controls autoplay preload="auto"
+    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
            poster="http://video-js.zencoder.com/oceans-clip.png"
            data-setup='{}'
            width='480'
@@ -67,22 +57,32 @@
         <p>Video Playback Not Supported</p>
     </video>
 </div>
-
+<script src="lib/video.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="lib/videojs.ads.js"></script>
+<script src="lib/videojs.ima.js"></script>
 <script>
-    var vid1 = videojs('vid1');
-    var vid2 = videojs('vid2');
+    var player1 = videojs('vid1');
+    player1.muted(true);
+    var options1 = {
+        id: 'vid1',
+        adTagUrl: 'http://mediatoday.ru/core/code.xml?pid=6504&vr=1'
+    };
+    player1.ima(options1);
+    player1.ima.requestAds();
+    player1.play();
 
-    vid1.muted(true);
-    vid1.ads();
-    vid1.vast({
-        url: 'http://mediatoday.ru/core/code.xml?pid=6504&vr=1'
-    });
+    var player2 = videojs('vid2');
+    player2.autoplay(autoplay);
+    player2.muted(true);
+    var options2 = {
+        id: 'vid2',
+        adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
+    };
+    player2.ima(options2);
+    player2.ima.requestAds();
+    player2.play();
 
-    vid2.muted(true);
-    vid2.ads();
-    vid2.vast({
-        url: 'http://videoads.theonion.com/vast/270.xml'
-    });
 </script>
 
 </body>
