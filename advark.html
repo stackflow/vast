@@ -4,9 +4,8 @@
     <meta charset="utf-8"/>
     <title>Video.js VAST Example</title>
 
-    <link href="css/video-js.css" rel="stylesheet">
-    <link href="lib/videojs-contrib-ads/videojs.ads.css" rel="stylesheet" type="text/css">
-    <link href="videojs.vast.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.ads.css" rel="stylesheet" type="text/css">
 
     <style type="text/css">
         .description {
@@ -23,15 +22,6 @@
         }
     </style>
 
-    <!-- Include ES5 shim, sham and html5 shiv for ie8 support  -->
-    <!-- Exclude this if you don't need ie8 support -->
-    <script src="lib/videojs-ie8.min.js"></script>
-
-    <script src="lib/video.js"></script>
-    <script src="lib/videojs-contrib-ads/videojs.ads.js"></script>
-
-    <script src="lib/vast-client.js"></script>
-    <script src="videojs.vast.js"></script>
 </head>
 <body>
 <p class="description">Video.js VAST plugin examples.</p>
@@ -67,7 +57,11 @@
         <p>Video Playback Not Supported</p>
     </video>
 </div>
-
+<script src="lib/video.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="lib/videojs.ads.js"></script>
+<script src="lib/videojs.ima.js"></script>
+<script src="ads.js"></script>
 <script>
     /**
      * Формирование VAST-тэга
@@ -96,7 +90,7 @@
     var referer = encodeURIComponent(window.location.href); // адрес страницы (с http://), на которой воспроизводится видео в текущий момент.
     var video_id = encodeURIComponent(window.btoa(encodeURIComponent(window.location.href))); // уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
     var page = referer; // адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
-    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+    var autoplay = 0; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
     var duration = 46; // длительность видео в секундах
     var url = 'http://public.advarkads.com/vast?target_id=1&type_id=3&id=' + id +
             '&referer_url=' + referer +
@@ -105,22 +99,34 @@
             '&autoplay=' + autoplay +
             '&duration=' + duration;
 
-    var vid1 = videojs('vid1');
-    var vid2 = videojs('vid2');
+    var player1 = videojs('vid1');
+    player1.autoplay(autoplay);
+    player1.muted(true);
+    var options1 = {
+        id: 'vid1',
+        adTagUrl: url
+    };
+    player1.ima(options1);
+//    player1.ima.initializeAdDisplayContainer();
+    player1.ima.requestAds();
+    player1.play();
 
-    vid1.autoplay(autoplay);
-    vid1.muted(true);
-    vid1.ads();
-    vid1.vast({
-        url: url
-    });
+    var player2 = videojs('vid2');
+    player2.autoplay(autoplay);
+    player2.muted(true);
+    var options2 = {
+        id: 'vid1',
+        adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&' +
+        'iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&' +
+        'impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&' +
+        'cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&' +
+        'vid=short_onecue&correlator='
+    };
+    player2.ima(options2);
+//    player2.ima.initializeAdDisplayContainer();
+    player2.ima.requestAds();
+    player2.play();
 
-    vid2.autoplay(autoplay);
-    vid2.muted(true);
-    vid2.ads();
-    vid2.vast({
-        url: 'http://videoads.theonion.com/vast/270.xml'
-    });
 </script>
 
 </body>
