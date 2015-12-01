@@ -48,16 +48,14 @@
 <script src="lib/videojs.ima.js"></script>
 <script>
     var player = videojs('vid1');
-    player.autoplay(autoplay != 0);
+    player.autoplay(true);
     player.muted(true);
-    var options = {
+    player.ima({
         id: 'vid1',
         adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
-    };
-    player.ima(options);
+    });
     player.ima.requestAds();
     player.play();
-
 </script>
 
 </body>
