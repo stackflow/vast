@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Video.js VAST Example</title>
+
+    <link href="css/videojs.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.ads.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        .description {
+            background-color: #eee;
+            border: 1px solid #777;
+            padding: 10px;
+            font-size: .8em;
+            line-height: 1.5em;
+            font-family: Verdana, sans-serif;
+        }
+
+        .example-video-container {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+<p class="description">Video.js VAST plugin examples.</p>
+
+<div class="example-video-container">
+    <p class="description">Advark</p>
+
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='480'
+           height='300'
+    >
+        <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+        <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
+        <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+
+<div class="example-video-container">
+    <p class="description">Sample</p>
+
+    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='480'
+           height='300'
+    >
+        <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+        <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
+        <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+<script src="lib/video.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="lib/videojs.ads.js"></script>
+<script src="lib/videojs.ima.js"></script>
+<script>
+    /**
+     * Формирование VAST-тэга
+     * http://public.advarkads.com/vast?target_id=1&type_id=[type]&id=[id]&referer_url=[referer]&video_id=[video_id]&video_title=[title]&video_page_url=[page]&autoplay=[autoplay]&duration=[duration]
+     * Где:
+     * [type] - тип запрашиваемой рекламы, одно из следующих значений:
+     * 2 - postroll* (линейная реклама)
+     * 3 - preroll* (линейная реклама)
+     * 4 - тизеры (нелинейная реклама)
+     * 5 - видеобаннер (нелинейная реклама)
+     * 6 - pauseroll (линейная реклама)
+     * 7 - midroll (линейная реклама)
+     * 9 - кликандер (линейная реклама)
+     * *форматы доступные для flash и html5 видеоплееров
+
+     * [id] - ваш идентификатор в системе Advark
+     * [referer] - адрес страницы (с http://), на которой воспроизводится видео в текущий момент. Если он не указан, модуль пытается определить его самостоятельно (что не всегда возможно). При отсутствии или неверном значении данного параметра реклама не воспроизводится.
+     * [video_id] - уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
+     * [title] - заголовок видео (если имеется). Если нет, параметр можно не передавать.
+     * [page] - адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
+     * [autoplay] - подставить 1, если воспроизведение видео началось автоматически, иначе необходимо поставить 0
+     * [duration] - длительность видео в секундах.
+     * Все подставленные значения должны быть url-закодированы
+     */
+    var id = encodeURIComponent('4976-1-1'); // ваш идентификатор в системе Advark
+    var referer = encodeURIComponent(window.location.href); // адрес страницы (с http://), на которой воспроизводится видео в текущий момент.
+    var video_id = encodeURIComponent(window.btoa(encodeURIComponent(window.location.href))); // уникальный идентификатор видео на сайте. Любая идентифицирующая строка, постоянная для данного видео и уникальная в рамках данного сайта.
+    var page = referer; // адрес страницы с видео (с http://). Постоянный адрес по которому данное видео может быть найдено. В некоторых случаях может совпадать со значением [referer].
+    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+    var duration = 46; // длительность видео в секундах
+    var url = 'http://public.advarkads.com/vast?target_id=1&type_id=3&id=' + id +
+            '&referer_url=' + referer +
+            '&video_id=' + video_id +
+            '&video_page_url=' + page +
+            '&autoplay=' + autoplay +
+            '&duration=' + duration;
+
+    var player1 = videojs('vid1');
+    player1.autoplay(autoplay != 0);
+    player1.muted(true);
+    var options1 = {
+        id: 'vid1',
+        adTagUrl: url
+    };
+    player1.ima(options1);
+    player1.ima.requestAds();
+    player1.play();
+
+    var player2 = videojs('vid2');
+    player2.autoplay(autoplay != 0);
+    player2.muted(true);
+    var options2 = {
+        id: 'vid2',
+//        adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&' +
+//        'iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&' +
+//        'impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&' +
+//        'cust_params=sample_ar%3Dpremidpostpod%26deployment%3Dgmf-js&cmsid=496&' +
+//        'vid=short_onecue&correlator='
+        adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
+    };
+    player2.ima(options2);
+    player2.ima.requestAds();
+    player2.play();
+
+</script>
+
+</body>
+</html>

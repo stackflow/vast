@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Video.js VAST Example</title>
+
+    <link href="css/videojs.css" rel="stylesheet" type="text/css">
+    <link href="css/videojs.ads.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        .description {
+            background-color: #eee;
+            border: 1px solid #777;
+            padding: 10px;
+            font-size: .8em;
+            line-height: 1.5em;
+            font-family: Verdana, sans-serif;
+        }
+
+        .example-video-container {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+<p class="description">Video.js VAST plugin examples.</p>
+
+<div class="example-video-container">
+    <p class="description">Mediatoday</p>
+
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='480'
+           height='300'
+    >
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+
+<div class="example-video-container">
+    <p class="description">Sample</p>
+
+    <video id="vid2" class="video-js vjs-default-skin" controls preload="auto"
+           poster="http://video-js.zencoder.com/oceans-clip.png"
+           data-setup='{}'
+           width='480'
+           height='300'
+    >
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'>
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'>
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg'>
+        <p>Video Playback Not Supported</p>
+    </video>
+</div>
+<script src="lib/video.js"></script>
+<script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+<script src="lib/videojs.ads.js"></script>
+<script src="lib/videojs.ima.js"></script>
+<script>
+    var autoplay = 1; // подставить 1, если воспроизведение видео началось автоматически, иначе необходимо передать 0
+
+    var player1 = videojs('vid1');
+    player1.autoplay(autoplay != 0);
+    player1.muted(true);
+    var options1 = {
+        id: 'vid1',
+        adTagUrl: 'http://mediatoday.ru/core/code.xml?pid=6504&vr=1'
+    };
+    player1.ima(options1);
+    player1.ima.requestAds();
+    player1.play();
+
+    var player2 = videojs('vid2');
+    player1.autoplay(autoplay != 0);
+    player2.muted(true);
+    var options2 = {
+        id: 'vid2',
+        adTagUrl: 'http://videoads.theonion.com/vast/270.xml'
+    };
+    player2.ima(options2);
+    player2.ima.requestAds();
+    player2.play();
+
+</script>
+
+</body>
+</html>
